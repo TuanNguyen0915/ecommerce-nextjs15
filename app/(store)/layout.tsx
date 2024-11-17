@@ -1,4 +1,4 @@
-import Header from "@/components/shared/Header"
+import Header from "@/components/shared/header/Header"
 import React from "react"
 
 const StoreLayout = ({ children }: { children: React.ReactNode }) => {
