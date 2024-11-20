@@ -10,7 +10,7 @@ interface IProductsViewProps {
 const ProductsView = ({ products, categories }: IProductsViewProps) => {
   console.log(categories)
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex w-full flex-col p-4">
       {/* CATEGORIES */}
       <div className="w-full sm:w-[200px]">
         {/* TODO: CategorySelectorComponent will be here */}

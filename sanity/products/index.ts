@@ -64,9 +64,25 @@ const getProductsByName = async (searchParam: string) => {
   }
 }
 
+const getProductBySlug = async (slug: string) => {
+  const PRODUCT_QUERY = defineQuery(`
+    *[_type == 'product' && slug.current == "${slug}"]
+    `)
+  try {
+    const product = await sanityFetch({
+      query: PRODUCT_QUERY,
+    })
+    return product.data[0] || null
+  } catch (error) {
+    console.error("Error fetching product", error)
+    return []
+  }
+}
+
 export {
   getAllProducts,
   getAllCategories,
   getSaleByCouponCode,
   getProductsByName,
+  getProductBySlug,
 }

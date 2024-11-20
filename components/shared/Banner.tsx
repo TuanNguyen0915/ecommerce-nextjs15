@@ -6,7 +6,7 @@ const Banner = async () => {
   if (!sale?.isActive) return null
 
   return (
-    <div className="mx-4 my-2 w-full rounded-lg bg-gradient-to-r from-red-600 to-black px-6 py-10 text-white shadow-lg">
+    <div className="w-full rounded-lg bg-gradient-to-r from-red-600 to-black px-6 py-10 text-white shadow-lg">
       <div className="space-y-6">
         <h2 className="text-5xl font-bold max-md:text-3xl">{sale.title}</h2>
         <h3 className="text-3xl font-bold max-md:text-xl">
