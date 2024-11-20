@@ -22,7 +22,7 @@ const ProductById = async ({
     <div className="container mx-auto px-4 py-8 md:mt-10">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         {/* PRODUCT IMAGE */}
-        <div className="flex-center relative aspect-square h-full w-full overflow-hidden rounded-lg p-2">
+        <div className="relative aspect-square h-full w-full overflow-hidden rounded-lg p-2">
           {/* layout when out of stock */}
           {isOutOfStock && (
             <div className="absolute inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50">

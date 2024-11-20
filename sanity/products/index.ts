@@ -20,7 +20,7 @@ const getAllProducts = async () => {
 
 const getAllCategories = async () => {
   const CATEGORIES_QUERY = defineQuery(`
-    *[_tpe == "category"] | order(name asc)
+    *[_type == "category"] | order(name asc)
     `)
   try {
     const categories = await sanityFetch({
@@ -50,12 +50,12 @@ const getSaleByCouponCode = async (couponCode: string) => {
 }
 
 const getProductsByName = async (searchParam: string) => {
-  const PRODUCTS_QUERY = defineQuery(`
+  const PRODUCTS_QUERY_BY_NAMES = defineQuery(`
     *[_type == "product" && name match "${searchParam}*" || "${searchParam}" in categories ] | order(_createdAt desc)
     `)
   try {
     const products = await sanityFetch({
-      query: PRODUCTS_QUERY,
+      query: PRODUCTS_QUERY_BY_NAMES,
     })
     return products.data || []
   } catch (error) {
@@ -65,16 +65,34 @@ const getProductsByName = async (searchParam: string) => {
 }
 
 const getProductBySlug = async (slug: string) => {
-  const PRODUCT_QUERY = defineQuery(`
+  const PRODUCT_QUERY_BY_SLUG = defineQuery(`
     *[_type == 'product' && slug.current == "${slug}"]
     `)
   try {
     const product = await sanityFetch({
-      query: PRODUCT_QUERY,
+      query: PRODUCT_QUERY_BY_SLUG,
     })
     return product.data[0] || null
   } catch (error) {
     console.error("Error fetching product", error)
+    return []
+  }
+}
+
+const getProductsByCategory = async (category: string) => {
+  console.log(category)
+  const PRODUCTS_BY_CATEGORY_QUERY = defineQuery(`
+    *[_type =='product' 
+    && references(*[_type == 'category' && slug.current == "${category}"]._id)
+    ] | order(_createdAt desc)`)
+  try {
+    const products = await sanityFetch({
+      query: PRODUCTS_BY_CATEGORY_QUERY,
+      params: { category },
+    })
+    return products.data || []
+  } catch (error) {
+    console.error("Error fetching products by category", error)
     return []
   }
 }
@@ -85,4 +103,5 @@ export {
   getSaleByCouponCode,
   getProductsByName,
   getProductBySlug,
+  getProductsByCategory,
 }
