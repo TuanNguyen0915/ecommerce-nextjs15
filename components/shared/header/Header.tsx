@@ -20,7 +20,6 @@ const Header = () => {
     }
   }
 
-  console.log(user)
   return (
     <header className="flex-between flex-wrap gap-4 py-4">
       <Link
@@ -36,8 +35,14 @@ const Header = () => {
           className="max-w-4xl bg-gray-100"
         />
       </Form>
-      <DeskTopView user={user as UserResource} createClerkPasskey={createClerkPasskey}/>
-      <MobileView user={user as UserResource} createClerkPasskey={createClerkPasskey}/>
+      <DeskTopView
+        user={user as UserResource}
+        createClerkPasskey={createClerkPasskey}
+      />
+      <MobileView
+        user={user as UserResource}
+        createClerkPasskey={createClerkPasskey}
+      />
     </header>
   )
 }
