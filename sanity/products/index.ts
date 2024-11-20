@@ -51,7 +51,7 @@ const getSaleByCouponCode = async (couponCode: string) => {
 
 const getProductsByName = async (searchParam: string) => {
   const PRODUCTS_QUERY = defineQuery(`
-    *[_type == "product" && name match "${searchParam}"] | order(_createdAt desc)
+    *[_type == "product" && name match "${searchParam}*" || "${searchParam}" in categories ] | order(_createdAt desc)
     `)
   try {
     const products = await sanityFetch({
@@ -64,4 +64,9 @@ const getProductsByName = async (searchParam: string) => {
   }
 }
 
-export { getAllProducts, getAllCategories, getSaleByCouponCode, getProductsByName }
+export {
+  getAllProducts,
+  getAllCategories,
+  getSaleByCouponCode,
+  getProductsByName,
+}
