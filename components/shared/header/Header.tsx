@@ -2,11 +2,11 @@
 import { useUser } from "@clerk/nextjs"
 import { UserResource } from "@clerk/types"
 import Link from "next/link"
-import Form from "next/form"
-import { Input } from "../../ui/input"
 
 import DeskTopView from "./DeskTopView"
 import MobileView from "./MobileView"
+import SearchForm from "../searchForm/SearchForm"
+
 
 const Header = () => {
   const { user } = useUser()
@@ -28,13 +28,7 @@ const Header = () => {
       >
         Shopper
       </Link>
-      <Form action="/search" className="flex-1">
-        <Input
-          placeholder="Search for products"
-          name="query"
-          className="max-w-4xl bg-gray-100"
-        />
-      </Form>
+      <SearchForm />
       <DeskTopView
         user={user as UserResource}
         createClerkPasskey={createClerkPasskey}

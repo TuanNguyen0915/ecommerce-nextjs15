@@ -1,4 +1,3 @@
-import Loader from "@/components/shared/Loader"
 import ProductsView from "@/components/shared/ProductsView"
 import { Category, Product } from "@/sanity.types"
 import * as SANITY_FETCH_DATA from "@/sanity/products"

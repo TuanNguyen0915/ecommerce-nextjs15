@@ -34,7 +34,7 @@ const getAllCategories = async () => {
 }
 
 const getSaleByCouponCode = async (couponCode: string) => {
-  console.log(couponCode)
+ 
   const SALES_QUERY = defineQuery(`
     *[_type == "sale" && isActive == true &&couponCode == "${couponCode}"]
     `)
@@ -80,7 +80,6 @@ const getProductBySlug = async (slug: string) => {
 }
 
 const getProductsByCategory = async (category: string) => {
-  console.log(category)
   const PRODUCTS_BY_CATEGORY_QUERY = defineQuery(`
     *[_type =='product' 
     && references(*[_type == 'category' && slug.current == "${category}"]._id)
