@@ -6,7 +6,6 @@ import * as SANITY_FETCH_DATA from "@/sanity/products"
 export default async function Home() {
   const products = await SANITY_FETCH_DATA.getAllProducts()
   const categories = await SANITY_FETCH_DATA.getAllCategories()
-  if (!products) return <Loader />
 
   return (
     <div className="flex min-h-screen w-full flex-col items-center bg-gray-100">

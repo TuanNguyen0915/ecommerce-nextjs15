@@ -1,4 +1,3 @@
-import Loader from "@/components/shared/Loader"
 import ProductsView from "@/components/shared/ProductsView"
 import * as SANITY_FETCH_DATA from "@/sanity/products"
 
@@ -10,10 +9,6 @@ const CategoryPage = async ({
   const { slug } = await params
   const products = await SANITY_FETCH_DATA.getProductsByCategory(slug)
   const categories = await SANITY_FETCH_DATA.getAllCategories()
-  if (!slug || !products) {
-    return <Loader />
-  }
-
 
   return (
     <div className="flex min-h-screen w-full flex-col items-center space-y-4 bg-gray-100">

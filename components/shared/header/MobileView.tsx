@@ -64,7 +64,7 @@ const MobileView = ({
                 <SignOutButton />
               </Button>
             ) : (
-              <Button asChild className="w-full">
+              <Button className="w-full">
                 <SignInButton mode="modal"/>
               </Button>
             )}
