@@ -5,6 +5,7 @@ import NotFound from "@/components/shared/NotFound"
 import Image from "next/image"
 import { imageUrl } from "@/lib/imageUrl"
 import { PortableText } from "next-sanity"
+import AddToBasketButton from "@/components/shared/AddToBasketButton"
 const ProductById = async ({
   params,
 }: {
@@ -56,6 +57,9 @@ const ProductById = async ({
                 <PortableText value={product.description} />
               )}
             </div>
+          </div>
+          <div className="mt-6">
+            <AddToBasketButton product={product} disable={isOutOfStock} />
           </div>
         </div>
       </div>
