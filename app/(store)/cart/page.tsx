@@ -1,5 +1,6 @@
 "use client"
-import { Metadata } from "@/actions/createCheckoutSession"
+
+import { createCheckoutSession, Metadata } from "@/actions/createCheckOutSession"
 import AddToBasketButton from "@/components/shared/AddToBasketButton"
 import Loader from "@/components/shared/Loader"
 import { Button } from "@/components/ui/button"
@@ -47,6 +48,7 @@ const CartPage = () => {
         clerkUserId: user!.id,
       }
       const checkoutUrl = await createCheckoutSession(groupItems, metadata)
+      
       if (checkoutUrl) {
         window.location.href = checkoutUrl
       }
