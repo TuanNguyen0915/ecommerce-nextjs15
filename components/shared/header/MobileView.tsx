@@ -10,9 +10,11 @@ import { cn } from "@/lib/utils"
 const MobileView = ({
   user,
   createClerkPasskey,
+  itemCount,
 }: {
   user: UserResource
   createClerkPasskey: () => Promise<void>
+  itemCount: number
 }) => {
   return (
     <div className="md:hidden">
@@ -43,13 +45,16 @@ const MobileView = ({
           </SheetTitle>
           <div className="mt-20 w-full flex-1">
             <div className="flex-between w-full gap-2">
-              <Button asChild className="w-full">
-                <Link href="/cart">
+              <Button asChild className="flex-1">
+                <Link href="/cart" className="relative">
                   {/* TODO: span item count once global state is implemented */}
                   <TrolleyIcon className="h-12 w-12" /> <span>My Cart</span>
+                  <div className="flex-center absolute -right-[6px] -top-2 z-10 h-5 w-5 rounded-full bg-red-500 p-1 text-xs">
+                    {itemCount}
+                  </div>
                 </Link>
               </Button>
-              <Button asChild>
+              <Button asChild className="flex-1">
                 <Button asChild>
                   <Link href={user ? "/orders" : "/sign-in"} className="mx-4">
                     <PackageIcon className="h-12 w-12" /> <span>My Orders</span>
@@ -65,7 +70,7 @@ const MobileView = ({
               </Button>
             ) : (
               <Button className="w-full">
-                <SignInButton mode="modal"/>
+                <SignInButton mode="modal" />
               </Button>
             )}
           </div>

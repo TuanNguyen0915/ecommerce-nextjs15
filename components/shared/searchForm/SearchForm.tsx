@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 
 const SearchForm = ({ className }: { className?: string }) => {
   const [query, setQuery] = useState<string>("")
-  console.log(query)
+
   const resetForm = () => {
     setQuery("")
   }

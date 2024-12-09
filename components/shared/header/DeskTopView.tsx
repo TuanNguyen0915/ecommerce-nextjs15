@@ -5,22 +5,29 @@ import Link from "next/link"
 import { Button } from "../../ui/button"
 import { PackageIcon, TrolleyIcon } from "@sanity/icons"
 import { cn } from "@/lib/utils"
+import { Badge } from "@/components/ui/badge"
 
 const DeskTopView = ({
   user,
   createClerkPasskey,
+  itemCount,
 }: {
   user: UserResource
   createClerkPasskey: () => Promise<void>
+  itemCount: number
 }) => {
+
   return (
     <div className="flex items-center justify-end space-x-2 max-md:hidden">
-      <Button asChild>
-        <Link href="/cart">
+      <Link href="/cart">
+        <Button className="relative">
           {/* TODO: span item count once global state is implemented */}
           <TrolleyIcon className="h-12 w-12" /> <span>My Cart</span>
-        </Link>
-      </Button>
+          <div className="flex-center absolute -right-[6px] -top-3 z-10 rounded-full bg-red-500 p-1 text-xs w-5 h-5">
+            {itemCount}
+          </div>
+        </Button>
+      </Link>
 
       {user && (
         <Button asChild>

@@ -6,7 +6,7 @@ import Link from "next/link"
 import DeskTopView from "./DeskTopView"
 import MobileView from "./MobileView"
 import SearchForm from "../searchForm/SearchForm"
-
+import useBasketStore from "@/lib/store/store"
 
 const Header = () => {
   const { user } = useUser()
@@ -14,11 +14,14 @@ const Header = () => {
   const createClerkPasskey = async () => {
     try {
       const response = await user?.createPasskey()
-      console.log(response)
+    
     } catch (error) {
       console.error("Error: ", JSON.stringify(error, null, 2))
     }
   }
+
+  const { items } = useBasketStore((state) => state)
+  const itemCount = items.reduce((acc, item) => acc + item.quantity, 0)
 
   return (
     <header className="flex-between flex-wrap gap-4 py-4">
@@ -32,10 +35,12 @@ const Header = () => {
       <DeskTopView
         user={user as UserResource}
         createClerkPasskey={createClerkPasskey}
+        itemCount={itemCount}
       />
       <MobileView
         user={user as UserResource}
         createClerkPasskey={createClerkPasskey}
+        itemCount={itemCount}
       />
     </header>
   )
