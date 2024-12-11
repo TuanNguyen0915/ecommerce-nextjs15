@@ -30,19 +30,21 @@ export const createCheckoutSession = async (
       email: metadata.customerEmail,
       limit: 1,
     })
+
     let customerId: string | undefined
     if (customers.data.length > 0) {
       customerId = customers.data[0].id
     }
+
     const session = await stripe.checkout.sessions.create({
-      customer: customerId,
+      customer: customerId ? undefined : customerId,
       customer_creation: customerId ? undefined : "always",
       customer_email: customerId ? metadata.customerEmail : undefined,
       metadata,
       mode: "payment",
       allow_promotion_codes: true,
-      success_url: `${`http://${process.env.VERCEL_URL}` || process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`,
-      cancel_url: `${`http://${process.env.VERCEL_URL}` || process.env.NEXT_PUBLIC_BASE_URL}/cart`,
+      success_url: `${process.env.VERCEL_URL || process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`,
+      cancel_url: `${process.env.VERCEL_URL || process.env.NEXT_PUBLIC_BASE_URL}/cart`,
       line_items: items.map((item) => ({
         price_data: {
           currency: "usd",
